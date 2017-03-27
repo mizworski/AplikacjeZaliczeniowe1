@@ -5,39 +5,110 @@
     <title>Wybory Prezydenckie 2000</title>
 </head>
 <body>
-    <div id="tresc">
-        <div id="wyniki_top">
-            <div id="wyniki_top_mapa">
-                <!-- TODO wstaw mape-->
+<div id="top">
+    <div id="top_content">
+        <div>
+            <div id="logo">
+                <img src="img/logo_pkw.png" alt="" title="">
             </div>
-            <div id="wyniki_top_zbiorcze">
-                <div id="wyniki_top_zbiorcze_gora">
 
-                </div>
-<!--
-                <div id="wyniki_top_zbiorcze_diagram">
-
-                </div>
--->
-
-                <div id="wyniki_top_zbiorcze_dol">
-
-                </div>
-                <div id="wyniki_top_zbiorcze_legenda">
-
-                </div>
+            <div id="tytul">
+                Wybory Prezydenta
+                Rzeczpospolitej Polskiej
             </div>
-        </div>
-        <div id="wyniki_ogolne">
-            <div id="wyniki_ogolne_tabela">
-
-            </div>
-        </div>
-        <div id="wyniki_szczegolowe">
-            <div id="wyniki_szczegolowe_tabela">
-
+            <div id="rok">
+                2000
             </div>
         </div>
     </div>
+</div>
+<div id="tresc">
+    <div id="wyniki_top">
+        <div id="wyniki_top_mapa">
+            <!-- TODO wstaw mape-->
+        </div>
+        <div id="wyniki_top_zbiorcze">
+            <div id="wyniki_top_zbiorcze_gora">
+                <div>
+                    <h4>Zbiorcze statystyki głosowania</h4>
+                    <div>
+                        <div>
+                            <div>Liczba uprawnionych do głosowania</div>
+                            <div>30709281</div> <!-- todo jinja2 -->
+                        </div>
+                        <div>
+                            <div>Liczba kart ważnych</div>
+                            <div>16993169</div> <!-- todo jinja2 -->
+                        </div>
+                        <div>
+                            <div>Liczba wysłanych pakietów wyborczych</div>
+                            <div>56845</div> <!-- todo jinja2 -->
+                        </div>
+                        <div>
+                            <div>Liczba głosów ważnych</div>
+                            <div>16742938</div> <!-- todo jinja2 -->
+                        </div>
+                        <div>
+                            <div>Liczba głosów nieważnych</div>
+                            <div>250231</div> <!-- todo jinja2 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+                            <div id="wyniki_top_zbiorcze_diagram">
+
+                            </div>
+
+            <div id="wyniki_top_zbiorcze_dol">
+
+            </div>
+            <div id="wyniki_top_zbiorcze_legenda">
+
+            </div>
+            -->
+        </div>
+    </div>
+    <div id="wyniki_ogolne">
+        <div id="wyniki_ogolne_tabela">
+            <table>
+                <thead>
+                <tr role="row">
+                    <th>Lp</th>
+                    <th>Imię i nazwisko</th>
+                    <th>Liczba oddanych głosów</th>
+                    <th>Wynik wyborczy</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row">
+                    <td>1</td> <!-- todo jinja2 -->
+                    <td>Andrzej Dupa</td> <!-- todo jinja2 -->
+                    <td>2137</td> <!-- todo jinja2 -->
+                    <td>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="notrwd2">
+                                    <div>
+                                        <div style="width:51.55%; background-color:#693485;"></div> <!-- todo jinja2 -->
+                                    </div>
+                                </td>
+                                <td>51.55%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="wyniki_szczegolowe">
+        <div id="wyniki_szczegolowe_tabela">
+
+        </div>
+    </div>
+</div>
 </body>
 </html>
