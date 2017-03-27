@@ -2,30 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
     <title>Wybory Prezydenckie 2000</title>
 </head>
 <body>
 <div id="top">
-    <div id="top_content">
-        <div>
-            <div id="logo">
-                <img src="img/logo_pkw.png" alt="" title="">
-            </div>
-
-            <div id="tytul">
-                Wybory Prezydenta
-                Rzeczpospolitej Polskiej
-            </div>
-            <div id="rok">
-                2000
-            </div>
-        </div>
-    </div>
+    <h1>Wybory Prezydenta 2000</h1>
 </div>
 <div id="tresc">
     <div id="wyniki_top">
         <div id="wyniki_top_mapa">
             <!-- TODO wstaw mape-->
+            <img src="../img/mim.png" width="200px">
         </div>
         <div id="wyniki_top_zbiorcze">
             <div id="wyniki_top_zbiorcze_gora">
@@ -91,10 +79,11 @@
                             <tr>
                                 <td class="notrwd2">
                                     <div>
-                                        <div style="width:51.55%; background-color:#693485;"></div> <!-- todo jinja2 -->
+                                        <div style="width:51.55%; background-color:#693485;"></div>
+                                        <!-- todo jinja2 -->
                                     </div>
                                 </td>
-                                <td>51.55%</td>
+                                <td>21.37%</td>
                             </tr>
                             </tbody>
                         </table>
@@ -106,7 +95,35 @@
     </div>
     <div id="wyniki_szczegolowe">
         <div id="wyniki_szczegolowe_tabela">
-
+            <table>
+                <thead>
+                <tr role="row">
+                    <th>Kod</th>
+                    <th>Nazwa jednostki</th>
+                    <th>Głosy ważne</th>
+                    <th>Dariusz Maciej GRABOWSKI</th>
+                    <th>Piotr IKONOWICZ</th>
+                    <th>Jarosław KALINOWSKI</th>
+                    <th>Janusz KORWIN-MIKKE</th>
+                    <th>Marian KRZAKLEWSKI</th>
+                    <th>Aleksander KWAŚNIEWSKI</th>
+                    <th>Andrzej LEPPER</th>
+                    <th>Jan ŁOPUSZAŃSKI</th>
+                    <th>Andrzej Marian OLECHOWSKI</th>
+                    <th>Bogdan PAWŁOWSKI</th>
+                    <th>Tadeusz Adam WILECKI</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr role="row">
+                    <td>1</td> <!-- todo jinja2 -->
+                    <td>DOLNOŚLĄSKIE</td> <!-- todo jinja2 -->
+                    <td>2137</td> <!-- todo jinja2 -->
+                    <td>1488</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
