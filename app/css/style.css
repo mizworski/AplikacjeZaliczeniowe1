@@ -26,6 +26,11 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 div#top {
     left: 0;
     top: 0;
@@ -106,6 +111,24 @@ div#wyniki_top_zbiorcze_gora > div:nth-child(1) > div > div > div:nth-child(2) {
     text-align: right;
 }
 
+div#wykres_slupkowy {
+    padding: 50px 0;
+}
+
+div#kontener_wykresu {
+    background-color: #f8edf0;
+    width: 100%;
+    height: 20px;
+
+    display: flex;
+    flex-wrap: nowrap
+}
+
+div#kontener_wykresu > div {
+    height: 20px;
+    padding: 0;
+}
+
 div#wyniki_ogolne_tabela {
     width: 100%;
     display: inline-block;
@@ -116,7 +139,6 @@ div#wyniki_szczegolowe_tabela {
     width: 100%;
     display: inline-block;
     vertical-align: top;
-    margin: 50px 0;
     overflow: scroll;
     overflow-y: hidden;
 

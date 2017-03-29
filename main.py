@@ -1,85 +1,3 @@
-import xlrd
-
-wojewodztwa = {
-    1: 'Dolnoslaskie',
-    2: 'Dolnoslaskie',
-    3: 'Dolnoslaskie',
-    4: 'Dolnoslaskie',
-    5: 'Kujawsko-Pomorskie',
-    6: 'Kujawsko-Pomorskie',
-    7: 'Kujawsko-Pomorskie',
-    8: 'Lubelskie',
-    9: 'Lubelskie',
-    10: 'Lubelskie',
-    11: 'Lubelskie',
-    12: 'Lubelskie',
-    13: 'Lubuskie',
-    14: 'Lubuskie',
-    15: 'Łódzkie',
-    16: 'Łódzkie',
-    17: 'Łódzkie',
-    18: 'Łódzkie',
-    19: 'Łódzkie',
-    20: 'Małopolskie',
-    21: 'Małopolskie',
-    22: 'Małopolskie',
-    23: 'Małopolskie',
-    24: 'Małopolskie',
-    25: 'Małopolskie',
-    26: 'Małopolskie',
-    27: 'Małopolskie',
-    29: 'Mazowieckie',
-    30: 'Mazowieckie',
-    31: 'Mazowieckie',
-    32: 'Mazowieckie',
-    33: 'Mazowieckie',
-    34: 'Mazowieckie',
-    35: 'Mazowieckie',
-    36: 'Mazowieckie',
-    37: 'Opolskie',
-    38: 'Opolskie',
-    39: 'Podkarpackie',
-    40: 'Podkarpackie',
-    41: 'Podkarpackie',
-    42: 'Podkarpackie',
-    43: 'Podlaskie',
-    44: 'Podlaskie',
-    45: 'Podlaskie',
-    46: 'Pomorskie',
-    47: 'Pomorskie',
-    48: 'Pomorskie',
-    49: 'Śląskie',
-    50: 'Śląskie',
-    51: 'Śląskie',
-    52: 'Śląskie',
-    53: 'Śląskie',
-    54: 'Śląskie',
-    55: 'Świętokrzyskie',
-    56: 'Świętokrzyskie',
-    57: 'Warmińsko-Mazurskie',
-    58: 'Warmińsko-Mazurskie',
-    59: 'Warmińsko-Mazurskie',
-    60: 'Wielkopolskie',
-    61: 'Wielkopolskie',
-    62: 'Wielkopolskie',
-    63: 'Wielkopolskie',
-    64: 'Wielkopolskie',
-    65: 'Zachodniopomorskie',
-    66: 'Zachodniopomorskie',
-    67: 'Zachodniopomorskie',
-    68: 'Zachodniopomorskie',
-}
-
-
-def wczytaj_kraj():
-    statystyki_kraj = [0] * 24
-    statystyki_wojewodztwo = [0] * 24
-    statystyki_okreg = [0] * 24
-    statystyki_gmina = [0] * 24
-
-    for i in range(1, 69):
-        przetworz_arkusz(i)
-
 
 def przetworz_arkusz(numer_okregu):
     arkusz = otwotrz_arkusz(numer_okregu)
@@ -90,12 +8,27 @@ def przetworz_arkusz(numer_okregu):
     return 42
 
 
-def otwotrz_arkusz(numer_okregu):
-    numer = str(numer_okregu)
-    if numer_okregu < 10:
-        numer = "0" + numer
+def konwertuj_nazwe(napis):
+    ltrPL = "ŻÓŁĆĘŚĄŹŃżółćęśąźń "
+    ltrnoPL = "ZOLCESAZNzolcesazn-"
 
-    return xlrd.open_workbook("app/obwody/obw" + numer + ".xls").sheet_by_index(0)
+    trantab = str.maketrans(ltrPL, ltrnoPL)
+
+    napis = napis.translate(trantab)
+    napis = napis.lower()
+
+    return napis
 
 
-wczytaj_kraj()
+napis = 'Gąska BaRdzo Piękna'
+
+print(konwertuj_nazwe(napis))
+
+url_list = [{'target': 'http://10.58.48.103:5000/', 'clicks': '1'},
+            {'target': 'http://slash.org', 'clicks': '4'},
+            {'target': 'http://10.58.48.58:5000/', 'clicks': '1'},
+            {'target': 'http://de.com/a', 'clicks': '0'}]
+
+print(type(url_list[1]))
+
+# wczytaj_kraj()

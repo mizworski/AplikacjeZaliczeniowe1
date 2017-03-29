@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../css/style.css" rel="stylesheet" type="text/css">
-    <title>Wybory Prezydenckie 2000</title>
+    <title>Wybory Prezydenta 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type='text/javascript' src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -71,23 +71,19 @@
                     <div>
                         <div>
                             <div>Liczba uprawnionych do głosowania</div>
-                            <div>30709281</div> <!-- todo jinja2 -->
+                            <div>{{ uprawnionych }}</div> <!-- todo jinja2 -->
                         </div>
                         <div>
                             <div>Liczba kart ważnych</div>
-                            <div>16993169</div> <!-- todo jinja2 -->
-                        </div>
-                        <div>
-                            <div>Liczba wysłanych pakietów wyborczych</div>
-                            <div>56845</div> <!-- todo jinja2 -->
+                            <div>{{ kart_waznych }}</div> <!-- todo jinja2 -->
                         </div>
                         <div>
                             <div>Liczba głosów ważnych</div>
-                            <div>16742938</div> <!-- todo jinja2 -->
+                            <div>{{ glosow_waznych }}</div> <!-- todo jinja2 -->
                         </div>
                         <div>
                             <div>Liczba głosów nieważnych</div>
-                            <div>250231</div> <!-- todo jinja2 -->
+                            <div>{{ glosow_niewaznych }}</div> <!-- todo jinja2 -->
                         </div>
                     </div>
                 </div>
@@ -107,72 +103,52 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% for kandydat in kandydaci %}
                 <tr>
-                    <td>1</td> <!-- todo jinja2 -->
-                    <td>Andrzej Dupa</td> <!-- todo jinja2 -->
-                    <td>2137</td> <!-- todo jinja2 -->
+                    <td>{{ loop.index }}</td>
+                    <td>{{ kandydat['nazwa'] }}</td>
+                    <td>{{ kandydat['wynik_ilosc'] }}</td>
                     <td>
                         <table>
                             <tbody>
                             <tr>
                                 <td class="notrwd2">
                                     <div>
-                                        <div style="width:99.70%; background-color:#693485;"></div>
-                                        <!-- todo jinja2 -->
+                                        <div style="width:{{ kandydat['wynik_procent'] }}%; background-color:#693485;"></div>
                                     </div>
                                 </td>
-                                <td>99.70%</td>
+                                <td>{{ kandydat['wynik_procent'] }}%</td>
                             </tr>
                             </tbody>
                         </table>
                     </td>
                 </tr>
-                <!-- test -->
-                <tr>
-                    <td>1</td> <!-- todo jinja2 -->
-                    <td>Andrzej Dupa</td> <!-- todo jinja2 -->
-                    <td>2137</td> <!-- todo jinja2 -->
-                    <td>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td class="notrwd2">
-                                    <div>
-                                        <div style="width:21.37%; background-color:#693485;"></div>
-                                        <!-- todo jinja2 -->
-                                    </div>
-                                </td>
-                                <td>21.37%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td> <!-- todo jinja2 -->
-                    <td>Andrzej Dupa</td> <!-- todo jinja2 -->
-                    <td>2137</td> <!-- todo jinja2 -->
-                    <td>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td class="notrwd2">
-                                    <div>
-                                        <div style="width:14.88%; background-color:#693485;"></div>
-                                        <!-- todo jinja2 -->
-                                    </div>
-                                </td>
-                                <td>14.88%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <!-- koniec testu-->
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+
+    <div id="wykres_slupkowy">
+        <div id="kontener_wykresu">
+            {% for kandydat in kandydaci %}
+            <div style="background-color: {{ kandydat['kolor'] }}; width: {{ kandydat['wynik_procent'] }}%"></div>
+            {% endfor %}
+            <!--<div id="andrzej_dupa" style="background-color: #EEA2AD; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #B0171F; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #7A67EE; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #C6E2FF; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #00868B	; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #00EE76; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #483D8B; width: 10%"></div>-->
+            <!--<div id="andrzej_dupa" style="background-color: #8B8386; width: 10%"></div>-->
+            <!--<div id="jkm" style="background-color: #FF8C00; width: 5%"></div>-->
+            <!--<div id="jkm" style="background-color: #CD4F39; width: 5%"></div>-->
+            <!--<div id="jkm" style="background-color: #006400; width: 5%"></div>-->
+            <!--<div id="jkm" style="background-color: #800080; width: 5%"></div>-->
+        </div>
+    </div>
+
     <div id="wyniki_szczegolowe">
         <div id="wyniki_szczegolowe_tabela">
             <table class="wyniki">
@@ -191,14 +167,14 @@
                     <th>Jan ŁOPUSZAŃSKI</th>
                     <th>Andrzej Marian OLECHOWSKI</th>
                     <th>Bogdan PAWŁOWSKI</th>
+                    <th>Lech WAŁĘSA</th>
                     <th>Tadeusz Adam WILECKI</th>
-                    <th>ddddd</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td>1</td> <!-- todo jinja2 -->
-                    <td>DOLNOŚLĄSKIE</td> <!-- todo jinja2 -->
+                    <td><a href="mazowieckie.html">DOLNOŚLĄSKIE</a></td> <!-- todo jinja2 -->
                     <td>2137</td> <!-- todo jinja2 -->
                     <td>1488</td>
                     <td>1488</td>
