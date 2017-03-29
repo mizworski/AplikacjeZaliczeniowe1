@@ -70,8 +70,24 @@ wojewodztwa = {
     68: 'Zachodniopomorskie',
 }
 
+
 def wczytaj_kraj():
-    print("dd")
+    statystyki_kraj = [0] * 24
+    statystyki_wojewodztwo = [0] * 24
+    statystyki_okreg = [0] * 24
+    statystyki_gmina = [0] * 24
+
+    for i in range(1, 69):
+        przetworz_arkusz(i)
+
+
+def przetworz_arkusz(numer_okregu):
+    arkusz = otwotrz_arkusz(numer_okregu)
+
+    for i in range(8, 24):
+        print(arkusz.cell(0, i).value)
+
+    return 42
 
 
 def otwotrz_arkusz(numer_okregu):
@@ -82,4 +98,4 @@ def otwotrz_arkusz(numer_okregu):
     return xlrd.open_workbook("app/obwody/obw" + numer + ".xls").sheet_by_index(0)
 
 
-print(otwotrz_arkusz(65).cell(0, 1).value)
+wczytaj_kraj()

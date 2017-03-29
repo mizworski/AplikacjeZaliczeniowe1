@@ -4,6 +4,47 @@
     <meta charset="UTF-8">
     <link href="../css/style.css" rel="stylesheet" type="text/css">
     <title>Wybory Prezydenckie 2000</title>
+    <script type='text/javascript' src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['geochart']});
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Popularity'],
+                ['Pomorskie', 200],
+                ['Zachodniopomorskie', 200],
+                ['Warmińsko-mazurskie', 200],
+                ['Lubuskie', 200],
+                ['Wielkopolskie', 200],
+                ['Opolskie', 200],
+                ['Dolnośląskie', 200],
+                ['Mazowieckie', 100],
+                ['Śląskie', 100],
+                ['Małopolskie', 100],
+                ['Podkarpackie', 100],
+                ['Podlaskie', 100],
+                ['Świętokrzyskie', 100],
+                ['Kujawsko-Pomorskie', 100],
+                ['Świętokrzyskie', 100],
+                ['Lubelskie', 100],
+                ['Łódzkie', 100]
+            ]);
+
+            var options = {
+                region: 'PL',
+                displayMode: 'regions',
+                resolution: 'provinces',
+                datalessRegionColor: 'transparent',
+                legend: 'none'
+            };
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
 <div id="top">
@@ -12,8 +53,7 @@
 <div id="tresc">
     <div id="wyniki_top">
         <div id="wyniki_top_mapa">
-            <!-- TODO wstaw mape-->
-            <img src="../img/mim.png" width="200px">
+            <div id="regions_div"></div>
         </div>
         <div id="wyniki_top_zbiorcze">
             <div id="wyniki_top_zbiorcze_gora">
