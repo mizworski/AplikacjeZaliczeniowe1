@@ -112,7 +112,7 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td class="notrwd2">
+                                <td>
                                     <div>
                                         <div style="width:{{ kandydat['wynik_procent'] }}%;
                                         background-color: {{ kandydat['kolor']}};"></div>
@@ -146,46 +146,16 @@
                     {% for label in labels %}
                     <th>{{ label }}</th>
                     {% endfor %}
-                    <!--<th>Kod</th>-->
-                    <!--<th>Nazwa jednostki</th>-->
-                    <!--<th>Głosy ważne</th>-->
-                    <!--<th>Dariusz Maciej GRABOWSKI</th>-->
-                    <!--<th>Piotr IKONOWICZ</th>-->
-                    <!--<th>Jarosław KALINOWSKI</th>-->
-                    <!--<th>Janusz KORWIN-MIKKE</th>-->
-                    <!--<th>Marian KRZAKLEWSKI</th>-->
-                    <!--<th>Aleksander KWAŚNIEWSKI</th>-->
-                    <!--<th>Andrzej LEPPER</th>-->
-                    <!--<th>Jan ŁOPUSZAŃSKI</th>-->
-                    <!--<th>Andrzej Marian OLECHOWSKI</th>-->
-                    <!--<th>Bogdan PAWŁOWSKI</th>-->
-                    <!--<th>Lech WAŁĘSA</th>-->
-                    <!--<th>Tadeusz Adam WILECKI</th>-->
                 </tr>
                 </thead>
                 <tbody>
+                {% for wiersz in wyniki %}
                 <tr>
-                    {% for wiersz in wyniki %}
-                        {% for kolumna in wiersz %}
-                            <td>{{ kolumna }}</td>
-                        {% endfor %}
+                    {% for kolumna in wiersz %}
+                    <td>{{ kolumna }}</td>
                     {% endfor %}
-                    <!--<td>1</td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
-                    <!--<td><a href="mazowieckie.html">DOLNOŚLĄSKIE</a></td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
-                    <!--<td>2137</td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
-                    <!--<td>1488</td>-->
                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

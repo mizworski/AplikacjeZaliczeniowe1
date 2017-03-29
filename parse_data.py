@@ -1,5 +1,5 @@
-from jinja_test import Environment, PackageLoader
-from jinja_test import select_autoescape
+from jinja2 import Environment, PackageLoader
+from jinja2 import select_autoescape
 import csv
 
 colors = [
@@ -55,24 +55,26 @@ def generate_main_webpage(results_country, candidates):
     glosow_niewaznych = 0
 
     candidate_results_summary = [0] * 12
+    wyniki = []
 
     for result in results_country:
-        uprawnionych += float(result[1])
-        kart_waznych += float(result[2])
-        glosow_waznych += float(result[3])
-        glosow_niewaznych += float(result[4])
+        wyniki.append([result[0], result[3]] + result[5:17])
+        uprawnionych += int(result[1])
+        kart_waznych += int(result[2])
+        glosow_waznych += int(result[3])
+        glosow_niewaznych += int(result[4])
         for i in range(0, 12):
-            candidate_results_summary[i] += float(result[i + 5])
+            candidate_results_summary[i] += int(result[i + 5])
 
     kandydaci = []
 
     for i in range(0, 12):
-        kandydat = [
-            candidates[i],
-            candidate_results_summary[i],
-            candidate_results_summary[i] / glosow_waznych,
-            colors[i]
-        ]
+        kandydat = {
+            'nazwa': candidates[i],
+            'wynik_ilosc': candidate_results_summary[i],
+            'wynik_procent': round(100 * candidate_results_summary[i] / glosow_waznych, 2),
+            'kolor': colors[i]
+        }
         kandydaci.append(kandydat)
 
     env = Environment(
@@ -81,42 +83,45 @@ def generate_main_webpage(results_country, candidates):
     )
 
     template = env.get_template("general_template.html")
-    with open("app/templates/main.html", "w") as out:
+    with open("app/output/main.html", "w") as out:
         out.write(template.render(
             uprawnionych=uprawnionych,
             kart_waznych=kart_waznych,
             glosow_waznych=glosow_waznych,
             glosow_niewaznych=glosow_niewaznych,
             kandydaci=kandydaci,
-            wyniki=results_country
+            wyniki=wyniki,
+            labels=summary_labels
         ))
 
 
-def create_webpage(results_country, candidates):
+def create_webpage(name, results, candidates):
     uprawnionych = 0
     kart_waznych = 0
     glosow_waznych = 0
     glosow_niewaznych = 0
 
     candidate_results_summary = [0] * 12
+    wyniki = []
 
-    for result in results_country:
-        uprawnionych += float(result[1])
-        kart_waznych += float(result[2])
-        glosow_waznych += float(result[3])
-        glosow_niewaznych += float(result[4])
+    for result in results:
+        wyniki.append([result[0], result[3]] + result[5:17])
+        uprawnionych += int(result[1])
+        kart_waznych += int(result[2])
+        glosow_waznych += int(result[3])
+        glosow_niewaznych += int(result[4])
         for i in range(0, 12):
-            candidate_results_summary[i] += float(result[i + 5])
+            candidate_results_summary[i] += int(result[i + 5])
 
     kandydaci = []
 
     for i in range(0, 12):
-        kandydat = [
-            candidates[i],
-            candidate_results_summary[i],
-            candidate_results_summary[i] / glosow_waznych,
-            colors[i]
-        ]
+        kandydat = {
+            'nazwa': candidates[i],
+            'wynik_ilosc': candidate_results_summary[i],
+            'wynik_procent': round(100 * candidate_results_summary[i] / glosow_waznych, 2),
+            'kolor': colors[i]
+        }
         kandydaci.append(kandydat)
 
     env = Environment(
@@ -125,14 +130,17 @@ def create_webpage(results_country, candidates):
     )
 
     template = env.get_template("general_template.html")
-    with open("app/templates/main.html", "w") as out:
+    subdomain = name + '.html'
+
+    with open("app/output/" + subdomain, "w") as out:
         out.write(template.render(
             uprawnionych=uprawnionych,
             kart_waznych=kart_waznych,
             glosow_waznych=glosow_waznych,
             glosow_niewaznych=glosow_niewaznych,
             kandydaci=kandydaci,
-            wyniki=results_country
+            wyniki=wyniki,
+            labels=summary_labels
         ))
 
     return [uprawnionych, kart_waznych, glosow_waznych, glosow_niewaznych] + candidate_results_summary
@@ -140,21 +148,21 @@ def create_webpage(results_country, candidates):
 
 def process_row(row, prev, results_circuit, results_province, results_country, candidates):
     if prev != [] and row[0] != prev[0]:
-        circuit_summary = create_webpage(results_circuit, candidates)
+        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
         circuit_row = ['Okreg ' + prev[1]] + circuit_summary
         results_province.append(circuit_row)
 
-        province_summary = create_webpage(results_province, candidates)
+        province_summary = create_webpage(row[0].lower(), results_province, candidates)
         province_row = [row[0].lower()] + province_summary
         results_country.append(province_row)
-        results_circuit = []
-        results_province = []
+        results_circuit.clear()
+        results_province.clear()
         print("nowe wojewodztwo " + row[0])
     elif prev != [] and row[1] != prev[1]:
-        circuit_summary = create_webpage(results_circuit, candidates)
+        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
         circuit_row = ['Okreg ' + prev[1]] + circuit_summary
         results_province.append(circuit_row)
-        results_circuit = []
+        results_circuit.clear()
         print("nowy okrag" + row[1])
 
     # results=[nazwa_jednostki, uprawnionych, kart_waznych, glosow_waznych, glosow_niewaznych, grabowski..wilecki]
