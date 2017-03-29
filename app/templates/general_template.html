@@ -11,11 +11,12 @@
         google.charts.setOnLoadCallback(drawRegionsMap);
 
         function drawRegionsMap() {
+
             var data = google.visualization.arrayToDataTable([
-                ['Województwo', 'Popracie Zwycięzcy', 'Domain'],
+                ['Województwo', 'Popracie Zwycięzcy', 'Domain'], //todo ../inny_katalog/ nie działa
                 ['Pomorskie', 1, '/pomorskie'],
                 ['Zachodniopomorskie', 2, '/zachodniopomorskie'],
-                ['Warmińsko-mazurskie', 3, 'warminsko-mazurskie'],
+                ['Warmińsko-mazurskie', 3, '/warminsko-mazurskie'],
                 ['Lubuskie', 4, '/lubuskie'],
                 ['Wielkopolskie', 1, '/wielkopolskie'],
                 ['Opolskie', 2, '/opolskie'],
@@ -46,7 +47,7 @@
             google.visualization.events.addListener(chart, 'select', function () {
                 var selection = chart.getSelection();
                 if (selection.length > 0) {
-                    window.location.replace('http://localhost:63342/AplikacjeZaliczeniowe1/app/templates' +
+                    window.location.replace('http://localhost:63342/AplikacjeZaliczeniowe1/app/out' +
                         data.getValue(selection[0].row, 2) + '.html', '_blank');
                 }
             });
@@ -71,19 +72,19 @@
                     <div>
                         <div>
                             <div>Liczba uprawnionych do głosowania</div>
-                            <div>{{ uprawnionych }}</div> <!-- todo jinja2 -->
+                            <div>{{ uprawnionych }}</div>
                         </div>
                         <div>
                             <div>Liczba kart ważnych</div>
-                            <div>{{ kart_waznych }}</div> <!-- todo jinja2 -->
+                            <div>{{ kart_waznych }}</div>
                         </div>
                         <div>
                             <div>Liczba głosów ważnych</div>
-                            <div>{{ glosow_waznych }}</div> <!-- todo jinja2 -->
+                            <div>{{ glosow_waznych }}</div>
                         </div>
                         <div>
                             <div>Liczba głosów nieważnych</div>
-                            <div>{{ glosow_niewaznych }}</div> <!-- todo jinja2 -->
+                            <div>{{ glosow_niewaznych }}</div>
                         </div>
                     </div>
                 </div>
