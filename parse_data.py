@@ -54,6 +54,16 @@ def generate_all():
             process_row(row, prev, results_circuit, results_province, results_country, candidates)
             prev = row
 
+    circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
+    circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
+    results_province.append(circuit_row)
+
+    province_summary = create_webpage(prev[0].lower(), results_province, candidates)
+    province_row = [prev[0]] + province_summary + [prev[0].lower()]
+    results_country.append(province_row)
+    results_circuit.clear()
+    results_province.clear()
+
     generate_main_webpage(results_country, candidates)
 
 
@@ -95,7 +105,7 @@ def generate_main_webpage(results_country, candidates):
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    template = env.get_template("general_template.html")
+    template = env.get_template("main.html")
     with open("app/output/main.html", "w") as out:
         out.write(template.render(
             uprawnionych=uprawnionych,
@@ -147,7 +157,7 @@ def create_webpage(name, results, candidates):
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    template = env.get_template("general_template.html")
+    template = env.get_template("main.html")
     subdomain = konwertuj_nazwe(name + '.html')
 
     with open("app/output/" + subdomain, "w") as out:
@@ -170,8 +180,8 @@ def process_row(row, prev, results_circuit, results_province, results_country, c
         circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
         results_province.append(circuit_row)
 
-        province_summary = create_webpage(row[0].lower(), results_province, candidates)
-        province_row = [row[0]] + province_summary + [row[0].lower()]
+        province_summary = create_webpage(prev[0].lower(), results_province, candidates)
+        province_row = [prev[0]] + province_summary + [prev[0].lower()]
         results_country.append(province_row)
         results_circuit.clear()
         results_province.clear()
