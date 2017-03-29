@@ -44,10 +44,12 @@
             };
             var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
 
+            var base_location = 'file:///home/myxxeh/PycharmProjects/AplikacjeZaliczeniowe1/app/output';
+
             google.visualization.events.addListener(chart, 'select', function () {
                 var selection = chart.getSelection();
                 if (selection.length > 0) {
-                    window.location.replace('http://localhost:63342/AplikacjeZaliczeniowe1/app/out' +
+                    window.location.replace(base_location +
                         data.getValue(selection[0].row, 2) + '.html', '_blank');
                 }
             });

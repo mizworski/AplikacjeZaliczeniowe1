@@ -25,6 +25,18 @@ summary_labels = [
 ]
 
 
+def konwertuj_nazwe(napis):
+    ltrPL = "ŻÓŁĆĘŚĄŹŃżółćęśąźń "
+    ltrnoPL = "ZOLCESAZNzolcesazn-"
+
+    trantab = str.maketrans(ltrPL, ltrnoPL)
+
+    napis = napis.translate(trantab)
+    napis = napis.lower()
+
+    return napis
+
+
 def generate_all():
     with open('pkw2000.csv', newline='') as csvfile:
         results = csv.reader(csvfile, delimiter=',')
@@ -130,7 +142,7 @@ def create_webpage(name, results, candidates):
     )
 
     template = env.get_template("general_template.html")
-    subdomain = name + '.html'
+    subdomain = konwertuj_nazwe(name + '.html')
 
     with open("app/output/" + subdomain, "w") as out:
         out.write(template.render(
