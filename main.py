@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from jinja2 import Environment, PackageLoader
 from jinja2 import select_autoescape
 import csv
