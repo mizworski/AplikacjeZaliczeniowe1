@@ -6,6 +6,20 @@ body {
     vertical-align: baseline;
 }
 
+@media only screen and (max-width: 900px) {
+    div#wyniki_top_zbiorcze {
+        background: url("../img/snake.png") no-repeat center top;
+    }
+
+    div#wyniki_ogolne_tabela tbody > tr > td:nth-last-child(1) {
+        display: none;
+    }
+
+    div#wyniki_ogolne_tabela thead > tr > th:nth-last-child(1) {
+        display: none;
+    }
+}
+
 h1, h2, h3, h4 {
     margin: 0;
     padding: 0 0 20px 0;
@@ -47,7 +61,7 @@ div#wyniki_top {
 }
 
 div#wyniki_top svg path[fill^='none'] {
-  stroke-width:0px;
+    stroke-width: 0px;
 }
 
 div#wyniki_top > div {
