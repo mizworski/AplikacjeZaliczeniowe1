@@ -114,7 +114,8 @@
                             <tr>
                                 <td class="notrwd2">
                                     <div>
-                                        <div style="width:{{ kandydat['wynik_procent'] }}%; background-color:#693485;"></div>
+                                        <div style="width:{{ kandydat['wynik_procent'] }}%;
+                                        background-color: {{ kandydat['kolor']}};"></div>
                                     </div>
                                 </td>
                                 <td>{{ kandydat['wynik_procent'] }}%</td>
@@ -134,18 +135,6 @@
             {% for kandydat in kandydaci %}
             <div style="background-color: {{ kandydat['kolor'] }}; width: {{ kandydat['wynik_procent'] }}%"></div>
             {% endfor %}
-            <!--<div id="andrzej_dupa" style="background-color: #EEA2AD; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #B0171F; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #7A67EE; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #C6E2FF; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #00868B	; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #00EE76; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #483D8B; width: 10%"></div>-->
-            <!--<div id="andrzej_dupa" style="background-color: #8B8386; width: 10%"></div>-->
-            <!--<div id="jkm" style="background-color: #FF8C00; width: 5%"></div>-->
-            <!--<div id="jkm" style="background-color: #CD4F39; width: 5%"></div>-->
-            <!--<div id="jkm" style="background-color: #006400; width: 5%"></div>-->
-            <!--<div id="jkm" style="background-color: #800080; width: 5%"></div>-->
         </div>
     </div>
 
@@ -154,40 +143,48 @@
             <table class="wyniki">
                 <thead>
                 <tr>
-                    <th>Kod</th>
-                    <th>Nazwa jednostki</th>
-                    <th>Głosy ważne</th>
-                    <th>Dariusz Maciej GRABOWSKI</th>
-                    <th>Piotr IKONOWICZ</th>
-                    <th>Jarosław KALINOWSKI</th>
-                    <th>Janusz KORWIN-MIKKE</th>
-                    <th>Marian KRZAKLEWSKI</th>
-                    <th>Aleksander KWAŚNIEWSKI</th>
-                    <th>Andrzej LEPPER</th>
-                    <th>Jan ŁOPUSZAŃSKI</th>
-                    <th>Andrzej Marian OLECHOWSKI</th>
-                    <th>Bogdan PAWŁOWSKI</th>
-                    <th>Lech WAŁĘSA</th>
-                    <th>Tadeusz Adam WILECKI</th>
+                    {% for label in labels %}
+                    <th>{{ label }}</th>
+                    {% endfor %}
+                    <!--<th>Kod</th>-->
+                    <!--<th>Nazwa jednostki</th>-->
+                    <!--<th>Głosy ważne</th>-->
+                    <!--<th>Dariusz Maciej GRABOWSKI</th>-->
+                    <!--<th>Piotr IKONOWICZ</th>-->
+                    <!--<th>Jarosław KALINOWSKI</th>-->
+                    <!--<th>Janusz KORWIN-MIKKE</th>-->
+                    <!--<th>Marian KRZAKLEWSKI</th>-->
+                    <!--<th>Aleksander KWAŚNIEWSKI</th>-->
+                    <!--<th>Andrzej LEPPER</th>-->
+                    <!--<th>Jan ŁOPUSZAŃSKI</th>-->
+                    <!--<th>Andrzej Marian OLECHOWSKI</th>-->
+                    <!--<th>Bogdan PAWŁOWSKI</th>-->
+                    <!--<th>Lech WAŁĘSA</th>-->
+                    <!--<th>Tadeusz Adam WILECKI</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>1</td> <!-- todo jinja2 -->
-                    <td><a href="mazowieckie.html">DOLNOŚLĄSKIE</a></td> <!-- todo jinja2 -->
-                    <td>2137</td> <!-- todo jinja2 -->
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
-                    <td>1488</td>
+                    {% for wiersz in wyniki %}
+                        {% for kolumna in wiersz %}
+                            <td>{{ kolumna }}</td>
+                        {% endfor %}
+                    {% endfor %}
+                    <!--<td>1</td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
+                    <!--<td><a href="mazowieckie.html">DOLNOŚLĄSKIE</a></td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
+                    <!--<td>2137</td> &lt;!&ndash; todo jinja2 &ndash;&gt;-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
+                    <!--<td>1488</td>-->
                 </tr>
                 </tbody>
             </table>
