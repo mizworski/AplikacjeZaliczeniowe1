@@ -157,7 +157,7 @@ def create_webpage(name, results, candidates):
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    template = env.get_template("main.html")
+    template = env.get_template("subpage.html")
     subdomain = konwertuj_nazwe(name + '.html')
 
     with open("app/output/" + subdomain, "w") as out:
