@@ -70,7 +70,8 @@ def generate_main_webpage(results_country, candidates):
     wyniki = []
 
     for result in results_country:
-        wyniki.append([result[0], result[3]] + result[5:17])
+        wynik = [konwertuj_nazwe(result[17])] + [result[0], result[3]] + result[5:17]
+        wyniki.append(wynik)
         uprawnionych += int(result[1])
         kart_waznych += int(result[2])
         glosow_waznych += int(result[3])
@@ -117,7 +118,12 @@ def create_webpage(name, results, candidates):
     wyniki = []
 
     for result in results:
-        wyniki.append([result[0], result[3]] + result[5:17])
+        wynik = []
+        if len(result) == 17:
+            wynik =  ['#'] + [result[0], result[3]] + result[5:17]
+        else:
+            wynik = [konwertuj_nazwe(result[17])] + [result[0], result[3]] + result[5:17]
+        wyniki.append(wynik)
         uprawnionych += int(result[1])
         kart_waznych += int(result[2])
         glosow_waznych += int(result[3])
@@ -161,18 +167,18 @@ def create_webpage(name, results, candidates):
 def process_row(row, prev, results_circuit, results_province, results_country, candidates):
     if prev != [] and row[0] != prev[0]:
         circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
-        circuit_row = ['Okreg ' + prev[1]] + circuit_summary
+        circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
         results_province.append(circuit_row)
 
         province_summary = create_webpage(row[0].lower(), results_province, candidates)
-        province_row = [row[0].lower()] + province_summary
+        province_row = [row[0]] + province_summary + [row[0].lower()]
         results_country.append(province_row)
         results_circuit.clear()
         results_province.clear()
         print("nowe wojewodztwo " + row[0])
     elif prev != [] and row[1] != prev[1]:
         circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
-        circuit_row = ['Okreg ' + prev[1]] + circuit_summary
+        circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
         results_province.append(circuit_row)
         results_circuit.clear()
         print("nowy okrag" + row[1])
