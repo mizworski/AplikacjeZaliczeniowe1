@@ -11,6 +11,13 @@
     <h1>Wybory Prezydenta 2000</h1>
 </div>
 <div id="tresc">
+    <div id="nawigacja">
+        <h3>Jesteś tutaj: <a href="main.html">Polska</a>
+            {% for el in jednostki %}
+                | <a href="{{ el[0] }}.html">{{ el[1] }}</a>
+            {% endfor %}
+        </h3>
+    </div>
     <div id="wyniki_top">
         <div id="wyniki_top_zbiorcze">
             <div id="wyniki_top_zbiorcze_gora">
@@ -52,26 +59,26 @@
                 </thead>
                 <tbody>
                 {% for kandydat in kandydaci %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ kandydat['nazwa'] }}</td>
-                    <td>{{ kandydat['wynik_ilosc'] }}</td>
-                    <td>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <div style="width:{{ kandydat['wynik_procent'] }}%;
-                                        background-color: {{ kandydat['kolor']}};"></div>
-                                    </div>
-                                </td>
-                                <td>{{ kandydat['wynik_procent'] }}%</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ kandydat['nazwa'] }}</td>
+                        <td>{{ kandydat['wynik_ilosc'] }}</td>
+                        <td>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <div style="width:{{ kandydat['wynik_procent'] }}%;
+                                                    background-color: {{ kandydat['kolor'] }};"></div>
+                                        </div>
+                                    </td>
+                                    <td>{{ kandydat['wynik_procent'] }}%</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -81,7 +88,7 @@
     <div id="wykres_slupkowy">
         <div id="kontener_wykresu">
             {% for kandydat in kandydaci %}
-            <div style="background-color: {{ kandydat['kolor'] }}; width: {{ kandydat['wynik_procent'] }}%"></div>
+                <div style="background-color: {{ kandydat['kolor'] }}; width: {{ kandydat['wynik_procent'] }}%"></div>
             {% endfor %}
         </div>
     </div>
@@ -92,23 +99,23 @@
                 <thead>
                 <tr>
                     {% for label in labels %}
-                    <th>{{ label }}</th>
+                        <th>{{ label }}</th>
                     {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
                 {% for wiersz in wyniki %}
-                <tr>
-                    {% for kolumna in wiersz %}
-                        {% if loop.index == 1 %}
-                            <td><a href="{{ kolumna }}.html">
-                        {% elif loop.index == 2 %}
-                            {{ kolumna }}</a></td>
-                        {% else %}
-                            <td>{{ kolumna }}</td>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
+                    <tr>
+                        {% for kolumna in wiersz %}
+                            {% if loop.index == 1 %}
+                                <td><a href="{{ kolumna }}.html">
+                                    {% elif loop.index == 2 %}
+                                    {{ kolumna }}</a></td>
+                            {% else %}
+                                <td>{{ kolumna }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

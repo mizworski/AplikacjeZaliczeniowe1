@@ -55,11 +55,13 @@ def generate_all():
             process_row(row, prev, results_circuit, results_province, results_country, candidates)
             prev = row
 
-    circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
+    address = [[prev[0].lower(), prev[0]], ['okreg' + prev[1], 'Okreg ' + prev[1]]]
+    circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates, address)
     circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
     results_province.append(circuit_row)
 
-    province_summary = create_webpage(prev[0].lower(), results_province, candidates)
+    address = [[prev[0].lower(), prev[0]]]
+    province_summary = create_webpage(prev[0].lower(), results_province, candidates, address)
     province_row = [prev[0]] + province_summary + [prev[0].lower()]
     results_country.append(province_row)
     results_circuit.clear()
@@ -119,7 +121,7 @@ def generate_main_webpage(results_country, candidates):
         ))
 
 
-def create_webpage(name, results, candidates):
+def create_webpage(name, results, candidates, address):
     uprawnionych = 0
     kart_waznych = 0
     glosow_waznych = 0
@@ -131,7 +133,7 @@ def create_webpage(name, results, candidates):
     for result in results:
         wynik = []
         if len(result) == 17:
-            wynik =  ['#'] + [result[0], result[3]] + result[5:17]
+            wynik = ['#'] + [result[0], result[3]] + result[5:17]
         else:
             wynik = [konwertuj_nazwe(result[17])] + [result[0], result[3]] + result[5:17]
         wyniki.append(wynik)
@@ -169,7 +171,8 @@ def create_webpage(name, results, candidates):
             glosow_niewaznych=glosow_niewaznych,
             kandydaci=kandydaci,
             wyniki=wyniki,
-            labels=summary_labels
+            labels=summary_labels,
+            jednostki=address
         ))
 
     return [uprawnionych, kart_waznych, glosow_waznych, glosow_niewaznych] + candidate_results_summary
@@ -177,18 +180,21 @@ def create_webpage(name, results, candidates):
 
 def process_row(row, prev, results_circuit, results_province, results_country, candidates):
     if prev != [] and row[0] != prev[0]:
-        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
+        address = [[prev[0].lower(), prev[0]], ['okreg' + prev[1], 'Okreg ' + prev[1]]]
+        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates, address)
         circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
         results_province.append(circuit_row)
 
-        province_summary = create_webpage(prev[0].lower(), results_province, candidates)
+        address = [[prev[0].lower(), prev[0]]]
+        province_summary = create_webpage(prev[0].lower(), results_province, candidates, address)
         province_row = [prev[0]] + province_summary + [prev[0].lower()]
         results_country.append(province_row)
         results_circuit.clear()
         results_province.clear()
         print("nowe wojewodztwo " + row[0])
     elif prev != [] and row[1] != prev[1]:
-        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates)
+        address = [[prev[0].lower(), prev[0]], ['okreg' + prev[1], 'Okreg ' + prev[1]]]
+        circuit_summary = create_webpage('okreg' + prev[1], results_circuit, candidates, address)
         circuit_row = ['Okreg ' + prev[1]] + circuit_summary + ['okreg' + prev[1]]
         results_province.append(circuit_row)
         results_circuit.clear()

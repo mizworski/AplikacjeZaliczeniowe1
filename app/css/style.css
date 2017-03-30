@@ -40,6 +40,10 @@ div#top {
 
 }
 
+div#nawigacja {
+    padding: 40px 0;
+}
+
 div#top h1 {
     padding: 30px 0;
     color: #ffffff;
