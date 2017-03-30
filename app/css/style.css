@@ -223,14 +223,11 @@ div#wyniki_szczegolowe_tabela tbody > tr > td:nth-child(1) {
 
 .wyniki > tbody > tr > td > table tr td:nth-child(2) {
     width: 20%;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 10px;
     text-align: right;
 }
 
 .wyniki > tbody > tr > td > table tr td:nth-child(2) > div {
-    width: 40px;
+    width: 50px;
 }
 
-/*div#wyniki_ogolne_tabela > table tbody tr:nth-child(even) {*/
-/*background-color: #f3f3f3;*/
-/*}*/
