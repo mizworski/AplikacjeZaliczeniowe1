@@ -103,6 +103,8 @@ def generate_main_webpage(results_country, candidates):
         }
         kandydaci.append(kandydat)
 
+    kandydaci_posortowani = sorted(kandydaci, key=lambda k: k['wynik_ilosc'], reverse=True)
+
     env = Environment(
         loader=PackageLoader('app', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -115,7 +117,7 @@ def generate_main_webpage(results_country, candidates):
             kart_waznych=kart_waznych,
             glosow_waznych=glosow_waznych,
             glosow_niewaznych=glosow_niewaznych,
-            kandydaci=kandydaci,
+            kandydaci=kandydaci_posortowani,
             wyniki=wyniki,
             labels=summary_labels
         ))
@@ -155,6 +157,8 @@ def create_webpage(name, results, candidates, address):
         }
         kandydaci.append(kandydat)
 
+    kandydaci_posortowani = sorted(kandydaci, key=lambda k: k['wynik_ilosc'], reverse=True)
+
     env = Environment(
         loader=PackageLoader('app', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -169,7 +173,7 @@ def create_webpage(name, results, candidates, address):
             kart_waznych=kart_waznych,
             glosow_waznych=glosow_waznych,
             glosow_niewaznych=glosow_niewaznych,
-            kandydaci=kandydaci,
+            kandydaci=kandydaci_posortowani,
             wyniki=wyniki,
             labels=summary_labels,
             jednostki=address

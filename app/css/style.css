@@ -6,9 +6,9 @@ body {
     vertical-align: baseline;
 }
 
-@media only screen and (max-width: 900px) {
-    div#wyniki_top_zbiorcze {
-        background: url("../img/snake.png") no-repeat center top;
+@media only screen and (max-width: 1000px) {
+    div#wyniki_ogolne_tabela {
+        background: url("../img/snake.png") no-repeat center right;
     }
 
     div#wyniki_ogolne_tabela tbody > tr > td:nth-last-child(1) {
@@ -215,7 +215,7 @@ div#wyniki_szczegolowe_tabela tbody > tr > td:nth-child(1) {
     border-right: 1px solid #e1e1e1;
 }
 
-.wyniki > tbody > tr td div {
+.wyniki > tbody > tr > td > table tr td:nth-child(1) div {
     background-color: #f8edf0;
     width: 100%;
     height: 20px;
@@ -224,6 +224,11 @@ div#wyniki_szczegolowe_tabela tbody > tr > td:nth-child(1) {
 .wyniki > tbody > tr > td > table tr td:nth-child(2) {
     width: 20%;
     padding: 0 0 0 20px;
+    text-align: right;
+}
+
+.wyniki > tbody > tr > td > table tr td:nth-child(2) > div {
+    width: 40px;
 }
 
 /*div#wyniki_ogolne_tabela > table tbody tr:nth-child(even) {*/

@@ -12,26 +12,31 @@
 
         function drawRegionsMap() {
 
-            var data = google.visualization.arrayToDataTable([
-                ['Województwo', 'Popracie Zwycięzcy', 'Domain'], //todo ../inny_katalog/ nie działa
-                ['Pomorskie', 1, '/pomorskie'],
-                ['Zachodniopomorskie', 2, '/zachodniopomorskie'],
-                ['Warmińsko-mazurskie', 3, '/warminsko-mazurskie'],
-                ['Lubuskie', 4, '/lubuskie'],
-                ['Wielkopolskie', 1, '/wielkopolskie'],
-                ['Opolskie', 2, '/opolskie'],
-                ['Dolnośląskie', 3, '/dolnoslaskie'],
-                ['Mazowieckie', 4, '/mazowieckie'],
-                ['Śląskie', 1, '/slaskie'],
-                ['Małopolskie', 2, '/malopolskie'],
-                ['Podkarpackie', 3, '/podkarpackie'],
-                ['Podlaskie', 4, '/podlaskie'],
-                ['Świętokrzyskie', 1, '/swietokrzyskie'],
-                ['Kujawsko-Pomorskie', 2, '/kujawsko-pomorskie'],
-                ['Świętokrzyskie', 3, '/swietokrzyskie'],
-                ['Lubelskie', 4, '/lubelskie'],
-                ['Łódzkie', 2, '/lodzkie']
-            ]);
+            var raw_data = [];
+
+            var single_element = [];
+
+            {% for wiersz in wyniki %}{% for el in wiersz %}{% if loop.index == 1 %}
+            single_element.push('/{{ el }}');
+            {% elif loop.index == 2 %}
+            single_element.push('{{ el }}');
+            {% elif loop.index == 3 %}
+            single_element.push('{{ el }}');
+            {% elif loop.index == 9 %}
+            single_element.push({{ el }});
+            raw_data.push(single_element);
+            single_element = [];
+            {%  endif %}{%  endfor %}{% endfor %}
+
+            var converted_data = [['Województwo', 'Poprarcie zwycięskiego kandydata', 'Domain']];
+
+            for (var i = 0; i < raw_data.length; i++) {
+                var new_el = [raw_data[i][1], 100 * raw_data[i][3] / raw_data[i][2], raw_data[i][0]];
+                converted_data.push(new_el);
+            }
+
+            var data = google.visualization.arrayToDataTable(converted_data);
+
             var view = new google.visualization.DataView(data);
             view.setColumns([0, 1]);
 
@@ -123,7 +128,9 @@
                                                     background-color: {{ kandydat['kolor'] }};"></div>
                                         </div>
                                     </td>
-                                    <td>{{ kandydat['wynik_procent'] }}%</td>
+                                    <td>
+                                        <div>{{ kandydat['wynik_procent'] }}%</div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
